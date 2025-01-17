@@ -35,6 +35,22 @@ return function (ContainerBuilder $containerBuilder) {
                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                     ],
                 ],
+                // Configuração PostgreSQL
+                "db_pgsql" => [
+                    'driver' => 'pgsql',
+                    'host' => '192.168.102.9',
+                    'port' => 5432, // Porta padrão para PostgreSQL
+                    'database' => 'dmultipla',
+                    'username' => 'julio',
+                    'password' => 'multipla',
+                    'charset' => 'utf8',
+                    'flags' => [
+                        PDO::ATTR_PERSISTENT => false,
+                        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_EMULATE_PREPARES => true,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    ],
+                ],
                 "secret_key" => "Chave%100%=>0.1MM@ahneS#001",
             ]);
         }
