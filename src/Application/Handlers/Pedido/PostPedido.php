@@ -66,28 +66,32 @@ class PostPedido
                     email = VALUES(email),
                     informacoes_adicionais = VALUES(informacoes_adicionais);
             ");
-            $stmt->bindValue(':informacoes_adicionais', trim($data['cabecalho']['Informações Adicionais']) ?? null, PDO::PARAM_STR);
-            $stmt->bindValue(':numero_pedido', $data['cabecalho']['numero_pedido']);
-            $stmt->bindValue(':numero_pedido_pai', $data['cabecalho']['numero_pedido_pai'] ?? null);
+            $stmt->bindValue(':bairro', $data['cabecalho']['Bairro']);
+            $stmt->bindValue(':cep', $data['cabecalho']['CEP'] ?? null);
+            $stmt->bindValue(':cnpj', $data['cabecalho']['CNPJ'] ?? null);
+            $stmt->bindValue(':cidade', $data['cabecalho']['Cidade']);
+            $stmt->bindValue(':cliente', $data['cabecalho']['Cliente']);
             $stmt->bindValue(':condicao_pagamento', $data['cabecalho']['Condição de Pagamento'] ?? null);
             $stmt->bindValue(':data_emissao', $data['cabecalho']['Data de Emissão']);
-            $stmt->bindValue(':vendedor', $data['cabecalho']['Vendedor'] ?? null);
-            $stmt->bindValue(':tipo_pedido', $data['cabecalho']['Tipo de pedido'] ?? null);
-            $stmt->bindValue(':logo_esquerda', $data['cabecalho']['logo_esquerda'] ?? null);
-            $stmt->bindValue(':titulo', $data['cabecalho']['Título'] ?? null);
-            $stmt->bindValue(':logo_direita', $data['cabecalho']['logo_direita'] ?? null);
-            $stmt->bindValue(':representada', $data['cabecalho']['Representada']);
-            $stmt->bindValue(':cliente', $data['cabecalho']['Cliente']);
-            $stmt->bindValue(':nome_fantasia', $data['cabecalho']['Nome Fantasia'] ?? null);
-            $stmt->bindValue(':cnpj', $data['cabecalho']['CNPJ'] ?? null);
-            $stmt->bindValue(':inscricao_estadual', $data['cabecalho']['Inscrição Estadual'] ?? null);
-            $stmt->bindValue(':endereco', $data['cabecalho']['Endereço']);
-            $stmt->bindValue(':bairro', $data['cabecalho']['Bairro']);
-            $stmt->bindValue(':cep', $data['cabecalho']['CEP']);
-            $stmt->bindValue(':cidade', $data['cabecalho']['Cidade']);
-            $stmt->bindValue(':estado', $data['cabecalho']['Estado']);
-            $stmt->bindValue(':telefone', $data['cabecalho']['Telefone']);
             $stmt->bindValue(':email', $data['cabecalho']['E-mail']);
+            $stmt->bindValue(':endereco', $data['cabecalho']['Endereço']);
+            $stmt->bindValue(':estado', $data['cabecalho']['Estado'] ?? null);
+            $stmt->bindValue(':nome_fantasia', $data['cabecalho']['Nome Fantasia'] ?? null);
+            $stmt->bindValue(':representada', $data['cabecalho']['Representada']);
+            $stmt->bindValue(':telefone', $data['cabecalho']['Telefone']);
+            $stmt->bindValue(':tipo_pedido', $data['cabecalho']['Tipo de pedido'] ?? null);
+            $stmt->bindValue(':vendedor', $data['cabecalho']['Vendedor'] ?? null);
+            $stmt->bindValue(':logo_direita', $data['cabecalho']['logo_direita'] ?? null);
+            $stmt->bindValue(':logo_esquerda', $data['cabecalho']['logo_esquerda'] ?? null);
+            $stmt->bindValue(':numero_pedido', $data['cabecalho']['numero_pedido']);
+            $stmt->bindValue(':titulo', $data['cabecalho']['titulo'] ?? null);
+
+
+            $stmt->bindValue(':informacoes_adicionais', isset($data['cabecalho']['Informações Adicionais']) ? trim($data['cabecalho']['Informações Adicionais']) : null, PDO::PARAM_STR);
+            $stmt->bindValue(':numero_pedido_pai', isset($data['cabecalho']['numero_pedido_pai']) ? $data['cabecalho']['numero_pedido_pai'] : null);
+            $stmt->bindValue(':inscricao_estadual', isset($data['cabecalho']['Inscrição Estadual']) ? $data['cabecalho']['Inscrição Estadual'] : null);
+            
+            
             $stmt->execute();
 
             // Insert Itens do Pedido
