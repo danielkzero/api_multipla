@@ -103,6 +103,7 @@ return function (App $app) use ($validarTokenMiddleware) {
     $app->group('/pedidos', function ($app) {
         $app->post('', Pedido\PostPedido::class);
         $app->get('', Pedido\GetPedido::class);
+        $app->get('/{id}', Pedido\GetPedidoById::class);
         $app->post('/complementos', Pedido\PostPedidoComplemento::class);
     });
 
