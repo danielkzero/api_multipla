@@ -35,7 +35,7 @@ class GetPedido
             if (!empty($dataInicial) && !empty($dataFinal)) {
                 $sql .= " AND data_emissao BETWEEN :data_inicial AND :data_final";
             }
-            $sql .= " ORDER BY id DESC";
+            $sql .= " ORDER BY numero_pedido DESC";
 
             $stmt = $this->pdo->prepare($sql);
 
