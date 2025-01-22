@@ -31,6 +31,7 @@ class PutUsuarioId
             $tipo_permissao = $body['tipo_permissao']; // Captura o tipo de permissão
             $permissao = json_encode($body['permissao']); // Converte as permissões para JSON
             $assinatura_email = isset($body['assinatura_email']) ? $body['assinatura_email'] : null; // Captura a assinatura de email
+            $senha = isset($body['senha']) ? md5($body['senha']) : null;
 
             // Prepara a consulta SQL para atualizar os dados do usuário
             $sql = 'UPDATE usuario SET 
@@ -40,6 +41,7 @@ class PutUsuarioId
                 ($avatar ? ', avatar=:avatar' : '') . // Adiciona a coluna de avatar somente se fornecida
                 ($telefone ? ', telefone=:telefone' : '') . // Adiciona a coluna de telefone somente se fornecida
                 ($assinatura_email ? ', assinatura_email=:assinatura_email' : '') . // Adiciona a coluna de assinatura_email somente se fornecida
+                ($senha ? ', senha=:senha' : '') . // Adiciona a coluna de assinatura_email somente se fornecida
                 ', tipo_permissao=:tipo_permissao, 
                 permissao=:permissao 
             WHERE id=:id';
@@ -56,6 +58,9 @@ class PutUsuarioId
             }
             if ($assinatura_email) {
                 $stmt->bindParam(':assinatura_email', $assinatura_email);
+            }
+            if ($senha) {
+                $stmt->bindParam(':senha', $senha);
             }
             $stmt->bindParam(':tipo_permissao', $tipo_permissao); // Adiciona tipo_permissao
             $stmt->bindParam(':permissao', $permissao);

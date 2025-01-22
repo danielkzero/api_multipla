@@ -29,6 +29,7 @@ class PostUsuario
             $tipo_permissao = $body['tipo_permissao']; // Captura o tipo de permissão
             $permissao = json_encode($body['permissao']); // Converte as permissões para JSON
             $assinatura_email = isset($body['assinatura_email']) ? $body['assinatura_email'] : null; // Captura a assinatura de email
+            $senha = isset($body['senha']) ? $body['senha'] : null;
             
 
             $stmt = $this->pdo->prepare('INSERT INTO usuario 
@@ -37,7 +38,8 @@ class PostUsuario
             ,usuario' . 
             ($avatar ? ',avatar' : '') . // Adiciona a coluna de avatar somente se fornecida
             ($telefone ? ',telefone' : '') . // Adiciona a coluna de telefone somente se fornecida
-            ($assinatura_email ? ',assinatura_email' : '') . // Adiciona a coluna de assinatura_email somente se fornecida
+            ($assinatura_email ? ',assinatura_email' : '') .
+            ($senha ? ',senha' : '') . // Adiciona a coluna de assinatura_email somente se fornecida
             ',tipo_permissao
             ,permissao) VALUES 
             (:nome
@@ -45,7 +47,8 @@ class PostUsuario
             ,:usuario' . 
             ($avatar ? ',:avatar' : '') . // Adiciona a coluna de avatar somente se fornecida
             ($telefone ? ',:telefone' : '') . // Adiciona a coluna de telefone somente se fornecida
-            ($assinatura_email ? ',:assinatura_email' : '') . // Adiciona a coluna de assinatura_email somente se fornecida
+            ($assinatura_email ? ',:assinatura_email' : '') .
+            ($senha ? ',:senha' : '') . // Adiciona a coluna de assinatura_email somente se fornecida
             ',:tipo_permissao
             ,:permissao)');
 
@@ -60,6 +63,9 @@ class PostUsuario
             }
             if ($assinatura_email) {
                 $stmt->bindParam(':assinatura_email', $assinatura_email);
+            }
+            if ($senha) {
+                $stmt->bindParam(':senha', $senha);
             }
             $stmt->bindParam(':tipo_permissao', $tipo_permissao); // Adiciona tipo_permissao
             $stmt->bindParam(':permissao', $permissao);

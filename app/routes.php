@@ -105,6 +105,8 @@ return function (App $app) use ($validarTokenMiddleware) {
         $app->get('', Pedido\GetPedido::class);
         $app->get('/{id}', Pedido\GetPedidoById::class);
         $app->post('/complementos', Pedido\PostPedidoComplemento::class);
+        $app->get('/complementos/{id}', Pedido\GetPedidoComplementoById::class);
+        $app->delete('/complementos/{id}', Pedido\PutPedidoComplementoById::class);
     });
 
     $app->group('/empresa', function ($app) {
@@ -114,6 +116,19 @@ return function (App $app) use ($validarTokenMiddleware) {
         $app->put('/{id}', Empresa\PutEmpresa::class);
         $app->delete('/{id}', Empresa\DeleteEmpresa::class);
     })->add($validarTokenMiddleware);
+
+    $app->group('/usuario', function ($app) use ($validarTokenMiddleware){
+        $app->get('', Usuario\GetUsuario::class);
+        $app->get('/{id}', Usuario\GetUsuarioId::class);
+        $app->post('', Usuario\PostUsuario::class)->add($validarTokenMiddleware);
+        $app->put('/{id}', Usuario\PutUsuarioId::class)->add($validarTokenMiddleware);
+        $app->delete('/{id}', Usuario\DeleteUsuarioId::class)->add($validarTokenMiddleware);
+    });
+
+    $app->group('/profile', function ($app) {
+        $app->get('', Usuario\GetUsuarioByEmail::class);
+    });
+
 
     $app->get('/statustoken', function (Request $request, Response $response) {
         try {
