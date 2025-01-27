@@ -22,7 +22,7 @@ return function (ContainerBuilder $containerBuilder) {
                 ],
                 "db" => [
                     'driver' => 'mysql',
-                    'host' => '192.168.102.9',
+                    'host' => '127.0.0.1',
                     'database' => 'dmultipla',
                     'username' => 'mobile',
                     'password' => '100senha',
@@ -38,7 +38,7 @@ return function (ContainerBuilder $containerBuilder) {
                 // Configuração PostgreSQL
                 "db_pgsql" => [
                     'driver' => 'pgsql',
-                    'host' => '192.168.102.9',
+                    'host' => 'localhost',
                     'port' => 5432, // Porta padrão para PostgreSQL
                     'database' => 'dmultipla',
                     'username' => 'julio',
