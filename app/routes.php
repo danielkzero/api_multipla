@@ -121,6 +121,8 @@ return function (App $app) use ($validarTokenMiddleware) {
         $app->post('/complementos', Pedido\PostPedidoComplemento::class);
         $app->get('/complementos/{id}', Pedido\GetPedidoComplementoById::class);
         $app->delete('/complementos/{id}', Pedido\PutPedidoComplementoById::class);
+        $app->delete('/itens/{id}/{codigo}', Pedido\DeletePedidoItem::class);
+        $app->put('/itens/{id}/{codigo}', Pedido\PutPedidoItem::class);
     });
 
     $app->group('/empresa', function ($app) {
