@@ -81,6 +81,20 @@ return function (App $app) use ($validarTokenMiddleware) {
         return $response;
     });
 
+    $app->get('/phpinfo', function ($request, $response, $args) {
+        ob_start();
+        phpinfo();
+        $phpinfo = ob_get_clean();
+    
+        $response->getBody()->write($phpinfo);
+        return $response;
+    });
+
+    $app->get('/test-pdo', function ($request, $response, $args) {
+        $drivers = \PDO::getAvailableDrivers();
+        $response->getBody()->write(json_encode($drivers));
+        return $response->withHeader('Content-Type', 'application/json');
+    });
 
     $app->post('/login', function (Request $request, Response $response) {
         $data = $request->getParsedBody();
