@@ -29,7 +29,7 @@ class PostUsuario
             $tipo_permissao = $body['tipo_permissao']; // Captura o tipo de permissão
             $permissao = json_encode($body['permissao']); // Converte as permissões para JSON
             $assinatura_email = isset($body['assinatura_email']) ? $body['assinatura_email'] : null; // Captura a assinatura de email
-            $senha = isset($body['senha']) ? $body['senha'] : null;
+            $senha = isset($body['senha']) ? md5($body['senha']) : null;
             
 
             $stmt = $this->pdo->prepare('INSERT INTO usuario 
